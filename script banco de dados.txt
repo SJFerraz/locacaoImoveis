@@ -1,0 +1,72 @@
+
+create database locacao_imoveis
+
+create table cliente(
+    id int UNSIGNED Auto_increment,
+    nome varchar(250) not null,
+    cpf varchar(14) not null,
+    dt_nascimento date not null,
+    endereco varchar(355),
+    nr_endereco varchar(8),
+    bairro varchar(50),
+    cidade varchar(50),
+    uf char(2),
+    cep varchar(8),
+    PRIMARY KEY (id)
+);
+
+create table categoria(
+    id int UNSIGNED Auto_increment,
+    descricao varchar(50) not null,
+    PRIMARY KEY (id)
+);
+
+create table imovel(
+    id int UNSIGNED Auto_increment,
+    descricao varchar(400) not null,
+    valor decimal(10,2) not null,
+    endereco varchar(355) not null,
+    nr_endereco varchar(8) not null,
+    bairro varchar(50) not null,
+    cidade varchar(50)  not null,
+    uf char(2) not null,
+    cep varchar(8) not null,
+    id_categoria int UNSIGNED not null,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_categoria) references Categoria(id) on delete no action
+);
+
+create table locacao(
+    id int UNSIGNED Auto_increment,
+    valor decimal(10,2) not null,
+    descricao varchar(300),
+    inicio_locacao date not null,
+    fim_locacao date,
+    id_cliente int UNSIGNED not null,
+    id_imovel int UNSIGNED not null,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_cliente) references Cliente(id) on delete no action,
+    FOREIGN KEY (id_imovel) references Imovel(id) on delete no ACTION
+);
+
+create table usuario(
+    id int UNSIGNED AUTO_INCREMENT,
+    nome varchar(100) not null,
+    login_usuario varchar(50) not null,
+    senha varchar(256),
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE usuario ADD UNIQUE (login_usuario);
+
+-- Cria Categorias
+insert into categoria(descricao) values ('casa'), ('apartamento');
+
+-- Cria Usuário Padrão
+insert into usuario (id, nome, login_usuario, senha) 
+ values (1, 
+         'Administrador',
+         'admin', 
+         '1eb1afa20dc454d6ef3b6dc6abcbd7dca7e519b698fdf073f4625ded09d74807'  -- senha = 'admin123' sha256 = 'login_usuario + senha'
+);
+
