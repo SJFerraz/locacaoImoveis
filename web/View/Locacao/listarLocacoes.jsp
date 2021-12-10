@@ -48,8 +48,8 @@
                 %>
                     </tbody>
                 </table>
-                <p><button type="button" onclick="window.location.reload (true); window.location.href = 'pgLocacao.jsp'">Criar Novo</button>
-                   <button type="button" onclick="window.location.reload (true); window.location.href = '../../View/Principal/inicio.jsp'">VOLTAR</button></p>
+                <div class="form-group"><button type="button" onclick="window.location.reload (true); window.location.href = 'pgLocacao.jsp'">CRIAR NOVO</button>
+                   <button type="button" onclick="window.location.reload (true); window.location.href = '../../View/Principal/inicio.jsp'">VOLTAR</button></div>
              </div>
         </div>
     </body>
